@@ -2,7 +2,7 @@ const {initDb} = require('./db');
 const app = require('./api');
 const initAndSeed = require('./db/seed')
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 initAndSeed()
     .then(() => {
