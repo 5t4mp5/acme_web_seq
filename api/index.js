@@ -4,7 +4,9 @@ const renderPage = require('../renderPage');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.redirect('/1');
+    models.Page.findByPk(1, {include: models.Content})
+        .then(page => res.send(renderPage(page.content.body, page.title)))
+        .catch(next); 
 })
 
 app.get('/:id', (req, res, next) => {
