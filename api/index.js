@@ -9,9 +9,14 @@ app.get('/', (req, res) => {
 
 app.get('/:id', (req, res, next) => {
     const{params: {id}} = req;
-    models.Page.findByPk(parseInt(id), {include: models.Content})
+    if([1,2,3].includes(parseInt(id))){
+        models.Page.findByPk(parseInt(id), {include: models.Content})
         .then(page => res.send(renderPage(page.content.body, page.title)))
-    .catch(next);
+        .catch(next);
+    }else{
+        res.status(404).send();
+    }
+    
 });
 
 module.exports = app;

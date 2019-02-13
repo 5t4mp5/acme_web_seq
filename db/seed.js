@@ -1,7 +1,8 @@
 const {Page, Content} = require ('./models');
 const {initDb} = require('./index');
 
-initDb(true)
+module.exports = () => {
+    return initDb(true)
     .then(() => {
         const createPages = Promise.all([Page.create({title: 'Home',}), Page.create({title: 'Employees',}), Page.create({title: 'Contact',})]);
         const createContent = Promise.all([
@@ -22,9 +23,9 @@ initDb(true)
     })
     .then(() => {
         console.log('db seeded');
-        process.exit(0);
     })
     .catch(e => {
         console.error(e)
         process.exit(1);
     });
+}
